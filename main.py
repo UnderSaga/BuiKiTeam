@@ -7,9 +7,9 @@ if __name__ == '__main__':
     x = (window.winfo_screenwidth() - window.winfo_reqwidth()) / 2.3
     y = (window.winfo_screenheight() - window.winfo_reqheight()) / 3
     window.wm_geometry("+%d+%d" % (x, y))
-    window.geometry('{}x{}'.format(int(window.winfo_screenwidth() * 0.3), int(window.winfo_screenheight() * 0.53)))
+    window.geometry('{}x{}'.format(int(window.winfo_screenwidth() * 0.3), int(window.winfo_screenheight() * 0.6)))
     window.resizable(False, False)
-    window.title('БуйКоин')
+    window.title("БуйКоин")
 
     MiningWind = LabelFrame(window,
                             width=int(window.winfo_screenwidth() * 0.3), height=int(window.winfo_screenheight() * 0.55),
@@ -27,12 +27,13 @@ if __name__ == '__main__':
     count = float(lines[1])
     S = float(lines[2])
     Buyok = float(lines[3])
-    Coin = PhotoImage(file=r"Image\b_coin.png")
-    Clic = PhotoImage(file=r"Image\upgrade_click.png")
-    MiningUper = PhotoImage(file=r"Image\upgrade_mining_power.png")
+    Coin = PhotoImage(file="Image/b_coin.png")
+    Clic = PhotoImage(file="Image/upgrade_click.png")
+    MiningUper = PhotoImage(file="Image/upgrade_mining_power.png")
     achiv = float(lines[4])
     r_var = IntVar()
     r_var.set(0)
+    running = True
 
     # Функции
     def Click():
@@ -125,16 +126,16 @@ if __name__ == '__main__':
         MiningOff['state'] = 'normal'
 
     def counter_label(label):
-        def count():
+        def counter():
             if running:
                 global counter
                 display = str(counter)
                 label['text'] = display
-                label.after(1000, count)
+                label.after(1000, counter)
                 counter += Buyok
                 pb.start()
                 pb.step(1)
-        count()
+        counter()
 
     def MiningOff():
         global running
@@ -228,9 +229,9 @@ if __name__ == '__main__':
                            bd=5)
 
     pb = ttk.Progressbar(MiningWind, orient='horizontal',
-                     mode='determinate',
-                     maximum=380, value=0,
-                     length=200)
+                        mode='determinate',
+                        maximum=380, value=0,
+                        length=200)
 
     # Меню
     menu = Menu(window)
